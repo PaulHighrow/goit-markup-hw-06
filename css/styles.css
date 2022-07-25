@@ -1,0 +1,862 @@
+:root {
+  /* Переменные цветов */
+
+  --main-color: #757575;
+  --secondary-color: #212121;
+  --triary-color: #ffffff;
+  --bg-color: #2f303a;
+  --secondary-bg-color: #f5f4fa;
+  --logo-color: #000000;
+  --accent-color: #2196f3;
+  --secondary-accent-color: #188ce8;
+  --header-border: #ececec;
+  --card-border: #eeeeee;
+  --customer-color: #afb1b8;
+
+  /* Переменные шрифтов */
+  --main-font-family: 'Roboto', sans-serif;
+  --secondary-font-family: 'Raleway', sans-serif;
+
+  /* Переменные отступов между элементами сеток */
+  --indent: 30px;
+  --filter-indent: 8px;
+
+  /* Переменная скорости анимаций */
+  --animation-global: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Наследуемые стили */
+body {
+  font-family: var(--main-font-family);
+  color: var(--main-color);
+  letter-spacing: 0.03em;
+}
+
+/* Сброс встроенной геометрии для заголовков, абзацев и списков */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Сброс четырехпиксельных зазоров у изображений */
+img,
+svg {
+  display: block;
+}
+
+/* Класс для скрытых заголовков */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* Сброс маркеров списков */
+.list {
+  list-style: none;
+}
+
+.link {
+  /* Сброс подчеркивания для ссылок */
+  text-decoration: none;
+
+  /* Эффект перехода для ссылок */
+  transition: color var(--animation-global);
+}
+
+/* Эффекты hover и focus для всех ссылок, кроме логотипа */
+.link:hover:not(.logo),
+.link:focus:not(.logo) {
+  color: var(--accent-color);
+}
+
+/* Размеры и отступы контейнеров контента */
+.container {
+  width: 1200px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+/* Вертикальное наполнение секций */
+.section {
+  padding-top: 94px;
+  padding-bottom: 94px;
+}
+
+/* Общая формула для масштабирования ширины элементов сеток */
+.item {
+  flex-basis: calc((100% - var(--indent) * (var(--items) - 1)) / var(--items));
+}
+
+/* =============== Стили шапки =============== */
+
+/* Нижняя рамка шапки */
+.header.border {
+  border-bottom: 1px solid var(--header-border);
+}
+
+/* Смена типа отображения элементов шапки */
+.header.container {
+  display: flex;
+  align-items: center;
+}
+
+/* Стили логотипа студии в шапке */
+.logo {
+  font-family: var(--secondary-font-family);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.19;
+}
+
+/* Цвет и отступ логотипа в шапке  */
+.header.logo {
+  margin-right: 93px;
+  color: var(--logo-color);
+}
+
+/* Списки шапки */
+.site-nav,
+.contacts-nav {
+  /* Расположение элементов шапки */
+  display: flex;
+  margin-left: auto;
+  gap: 50px;
+
+  /* Шрифт шапки */
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+
+  /* Уникальный символьный интервал в шапке */
+  letter-spacing: 0.02em;
+}
+
+/* Активная область ссылок навигации */
+.site-nav .link,
+.contacts-nav .link {
+  display: block;
+  padding: 32px 0;
+}
+
+/* Цвета элементов шапки */
+.site-nav .link {
+  color: var(--secondary-color);
+}
+
+.contacts-nav .link {
+  /* Цвет ссылок контактов */
+  color: var(--main-color);
+
+  /* Выравнивание иконок контактов */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Отступ от иконки */
+.contacts-nav .icon {
+  margin-right: 10px;
+  /* Цвет иконки */
+  fill: currentColor;
+}
+
+/* Размеры иконок хедера */
+.envelope {
+  width: 16px;
+  height: 12px;
+}
+
+.smartphone {
+  width: 10px;
+  height: 16px;
+}
+
+/* Цвет первой части логотипа */
+.logo-web {
+  color: var(--accent-color);
+}
+
+/* Позиционирование псевдоэлементов относительно ссылок навигации */
+.site-nav .link {
+  position: relative;
+}
+
+/* Отметка текущей страницы */
+.link.current {
+  color: var(--accent-color);
+}
+
+/* Псевдоэлемент подчеркивания ссылок навигации при ховере */
+.site-nav .link::after {
+  position: absolute;
+  left: 0;
+  /* Перекрытие псевдоэлементом нижней границы хедера */
+  bottom: -1px;
+
+  content: '';
+  display: block;
+
+  width: 100%;
+  height: 4px;
+
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
+
+/* Эффект подчеркивания ссылок навигации, кроме текущей */
+.site-nav .link:not(.current)::after {
+  transform: scaleX(0);
+  transition: transform var(--animation-global);
+}
+
+/* Масштабирование эффекта подчеркивания */
+.site-nav .link:hover::after,
+.site-nav .link:focus::after {
+  transform: scaleX(1);
+}
+
+/* =============== Стили контента главной страницы =============== */
+/* =============== Герой =============== */
+
+.hero {
+  background-color: var(--bg-color);
+  color: var(--triary-color);
+  line-height: 1.36;
+  text-align: center;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  /* Фоновое изображение героя, затемненное градиентом */
+  background-image: linear-gradient(to right, rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+    url('../images/bg-img.jpg');
+
+  /* Ограничение размеров изображения */
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Подгон размеров блока героя до значений макета */
+.hero.section {
+  padding: 200px 0;
+}
+
+/* Заголовок героя */
+.hero-title {
+  /* Ширина и центрирование элемента */
+  width: 696px;
+  margin: auto;
+  margin-bottom: 30px;
+
+  /* Стили шрифта, которые заголовок не может унаследовать */
+  font-weight: 900;
+  font-size: 44px;
+}
+
+/* Кнопка-герой */
+.btn-order {
+  /* Размеры, рамка и отступы кнопки */
+  padding: 10px 32px;
+  border-radius: 4px;
+  border: none;
+
+  /* Шрифт кнопки */
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.88;
+  letter-spacing: inherit;
+
+  /* Цвета и тень кнопки */
+  color: var(--triary-color);
+  background-color: var(--accent-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+
+  /* Эффект перехода для кнопки */
+  transition: background-color var(--animation-global);
+}
+
+/* Эффекты кнопки-героя */
+.btn-order:hover,
+.btn-order:focus {
+  background-color: var(--secondary-accent-color);
+}
+
+/* =============== Особенности компании =============== */
+/* Смена типа отображения списка особенностей */
+.feature.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--indent);
+}
+
+/* Переменная количества элементов в строке секции особенностей */
+.feature.item {
+  --items: 4;
+}
+
+/* Фон иконки и отступ от него */
+.feature .icon-box {
+  margin-bottom: 30px;
+  width: 100%;
+  height: 120px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--secondary-bg-color);
+  border-radius: 4px;
+}
+
+/* Размеры иконок */
+.icon-box .icon {
+  max-height: 70px;
+  max-width: 70px;
+}
+
+/* Стиль заголовков списка особенностей */
+.feature-title {
+  margin-bottom: 10px;
+
+  font-size: 14px;
+  line-height: 1.14;
+  text-transform: uppercase;
+
+  color: var(--secondary-color);
+}
+
+/* Стиль текста списка */
+.feature-text {
+  font-size: 14px;
+  line-height: calc(24 / 14);
+}
+
+/* =============== Чем мы занимаемся =============== */
+/* Стиль заголовков списков скиллов, команды и постоянных клиентов */
+.skills-title,
+.team-title,
+.customers-title {
+  margin-bottom: 50px;
+
+  font-size: 36px;
+  line-height: 1.17;
+  text-align: center;
+
+  color: var(--secondary-color);
+}
+
+/* Выравнивание отступа от границы секции для обеспечения правильного расстояния между контейнерами */
+.skills.section {
+  padding-top: 0;
+}
+
+/* Расположение элементов по горизонтали и отступы */
+.skills.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--indent);
+}
+
+.skills.item {
+  /* Позиционирование оверлея относительно элемента списка */
+  position: relative;
+
+  /* Переменная количества элементов в строке секции скиллов */
+  --items: 3;
+}
+
+.skills-overlay {
+  /* Позиционирование оверлея относительно элемента списка */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  /* Растягивание оверлея на всю ширину блока */
+  width: 100%;
+
+  /* Внутренние поля оверлея */
+  padding: 27px 10px;
+
+  /* Цвет оверлея */
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
+/* Cтиль текста в оверлее */
+.skills-text {
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--triary-color);
+}
+
+/* =============== Команда =============== */
+/* Фон секции */
+.team {
+  background-color: var(--secondary-bg-color);
+}
+
+/* Расположение элементов по горизонтали и отступы */
+.team.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--indent);
+}
+
+/* Фон и закругленные нижние рамки карточек сотрудников */
+.team-card {
+  background-color: var(--triary-color);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Переменная количества элементов в строке секции команды */
+.team-card.item {
+  --items: 4;
+}
+
+/* Имена сотрудников */
+.team-name {
+  margin-bottom: 10px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.19;
+
+  color: var(--secondary-color);
+}
+
+/* Должности */
+.team-job {
+  margin-bottom: 16px;
+
+  font-size: 16px;
+  line-height: 1.19;
+}
+
+/* Центрирование имен и должностей сотрудников  */
+.team-name,
+.team-job {
+  text-align: center;
+}
+
+/* Вертикальные поля текста карточек сотрудников */
+.team-card-description {
+  padding: 30px 10px;
+}
+
+/* Расположение ссылок на социальные сети в секции сотрудников и в футере*/
+.social-network {
+  /* Общий флекс для элементов списка и каждой ссылки по отдельности */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Оформление ссылок соцсетей сотрудников */
+.social-network.link {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  fill: var(--customer-color);
+
+  /* Эффект перехода для ссылок соцсетей */
+  transition: fill var(--animation-global), background-color var(--animation-global);
+}
+
+/* Оформление ссылок соцсетей футера, перенесены сюда для соблюдения правил каскадности */
+.footer .social-network.link {
+  fill: var(--triary-color);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Эффекты для ссылок соцсетей сотрудников */
+.social-network.link:hover,
+.social-network.link:focus {
+  background-color: var(--accent-color);
+  fill: var(--triary-color);
+}
+
+/* Размеры иконок соцсетей */
+.social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* =============== Постоянные клиенты =============== */
+/* Расположение элементов по горизонтали и отступы */
+.customers.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--indent);
+}
+
+/* Стиль элементов списка клиентов */
+.customers.item {
+  /* Переменная количества элементов в строке секции команды */
+  --items: 6;
+}
+
+/* Стиль иконок-ссылок в секции постоянных клиентов */
+.customers.link {
+  /* Рамка элемента */
+  border: 1px solid var(--customer-color);
+  border-radius: 4px;
+
+  /* Цвет иконки */
+  fill: var(--customer-color);
+
+  /* Высота элемента */
+  height: 92px;
+
+  /* Выравнивание иконки по центру элемента */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Эффекты перехода для списка постоянных клиентов */
+  transition: fill var(--animation-global), border-color var(--animation-global);
+}
+
+/* Размеры иконки */
+.customer.icon {
+  width: 106px;
+  height: 60px;
+}
+
+/* Эффект ховера для элементов списка постоянных клиентов */
+.customers.link:hover,
+.customers.link:focus {
+  border: 1px solid var(--accent-color);
+  fill: var(--accent-color);
+}
+
+/* =============== Футер =============== */
+/* Цвет и отступы фона */
+.footer:not(.logo) {
+  background-color: var(--bg-color);
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* Цвет и отступ логотипа в футере */
+.footer.logo {
+  display: block;
+  margin-bottom: 20px;
+
+  color: var(--triary-color);
+}
+
+/* Отступы между элементами списка, кроме последнего */
+.footer-item:not(:last-child) {
+  display: block;
+  margin-bottom: 9px;
+}
+
+/* Сброс курсива элемента address */
+.contacts-footer {
+  font-style: normal;
+}
+
+/* Стили элемента address, уникальный цвет с макета */
+.contacts-footer .link {
+  color: rgba(255, 255, 255, 0.6);
+
+  font-size: 14px;
+  line-height: 1.71;
+}
+
+/* Цвет адреса */
+.link.map {
+  color: var(--triary-color);
+}
+
+/* Расположение и выравнивание двух контейнеров в футере */
+.footer > .container {
+  display: flex;
+  align-items: baseline;
+}
+
+/* Отступ от контейнера контактной информации */
+.address-container {
+  margin-right: 70px;
+}
+
+/* Стиль заголовка списка соцсетей в футере */
+.footer-title {
+  margin-bottom: 20px;
+
+  font-size: 14px;
+  line-height: 1.14;
+  text-transform: uppercase;
+
+  color: var(--triary-color);
+}
+
+/* =============== Стили контента страницы портфолио =============== */
+/* =============== Стили фильтра =============== */
+
+/* Расположение кнопок фильтра */
+.filter.list {
+  display: flex;
+  justify-content: center;
+  gap: var(--filter-indent);
+  margin-bottom: 50px;
+}
+
+/* Стили кнопок фильтра */
+.btn {
+  padding: 6px 22px;
+
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.62;
+  letter-spacing: inherit;
+
+  color: var(--secondary-color);
+  background-color: var(--secondary-bg-color);
+  border: none;
+  border-radius: 4px;
+
+  /* Эффекты перехода для кнопок фильтра */
+  transition: color var(--animation-global), background-color var(--animation-global),
+    box-shadow var(--animation-global);
+}
+
+/* Эффекты кнопок фильтра при активации, ховере и фокусе*/
+.btn:hover,
+.btn:focus,
+.btn:active,
+/* Эффект кнопки, выбранной по умолчанию */
+.btn.active {
+  color: var(--triary-color);
+  background-color: var(--accent-color);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* =============== Стили карточек =============== */
+.project.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--indent);
+}
+
+/* Переменная количества элементов в строке секции портфолио */
+.project-card.item {
+  --items: 3;
+}
+
+.card-link {
+  /* Сброс подчеркивания для ссылок карточек */
+  text-decoration: none;
+
+  /* Изменение типа блочной модели элемента для реализации декоративных эффектов */
+  display: block;
+
+  /* Эффект перехода для ссылок карточек портфолио */
+  transition: box-shadow var(--animation-global);
+}
+
+.card-img-box {
+  /* Позиционирование оверлея относительно картинки */
+  position: relative;
+
+  /* Скрыть переполняющие элементы */
+  overflow: hidden;
+}
+
+/* Оверлей карточек */
+.card-overlay {
+  /* Позиционирование оверлея на всю ширтну картинки */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* Размер и поля оверлея */
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+
+  /* Фон оверлея */
+  background-color: rgba(33, 150, 243, 0.9);
+
+  /* Смещение и прозрачность оверлея */
+  opacity: 0;
+  transform: translateY(100%);
+
+  /* Эффекты перехода оверлея */
+  transition: transform var(--animation-global), opacity var(--animation-global);
+}
+
+/* Стили текста оверлея */
+.card-overlay-text {
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--triary-color);
+}
+
+/* Тень карточки при ховере и фокусе */
+.card-link:hover,
+.card-link:focus {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* Перемещение оверлея в видимое состояние при ховере */
+.card-link:hover .card-overlay,
+.card-link:focus .card-overlay {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+/* Стили контейнера для подписей карточек */
+.card-description {
+  padding: 20px 24px;
+  border: 1px solid var(--card-border);
+  border-top: none;
+}
+
+/* Стили заголовков карточек */
+.card-title {
+  color: var(--secondary-color);
+  font-size: 18px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+/* Стили категорий карточек */
+.card-category {
+  color: var(--main-color);
+  font-size: 16px;
+  line-height: 1.88;
+}
+
+/*
+  |==============================
+  | Бэкдроп и модальное окно
+  |==============================
+*/
+
+/* Бэкдроп */
+.backdrop {
+  /* Позиционирование бэкдропа  */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Размеры бэкдропа относительно вьюпорта */
+  width: 100vw;
+  height: 100vh;
+
+  /* Полупрозрачный фон бэкдропа */
+  background-color: rgba(0, 0, 0, 0.2);
+
+  /* Эффект перехода при открытии и закрытии модального окна */
+  transition: visibility var(--animation-global), opacity var(--animation-global);
+}
+
+/* Скрытый бэкдроп */
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Эффект "лопнувшей формы", центрирование при закрытии модального окна */
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.05);
+  opacity: 0;
+}
+
+/* Модальное окно */
+.modal {
+  /* Позиционирование модального окна в бэкдропе */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  /* Цен */
+  transform: translate(-50%, -50%) scale(1);
+
+  /* Приблизительные размеры модального окна */
+  min-width: 530px;
+  min-height: 580px;
+
+  /* Оформление модального окна */
+  background: var(--triary-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  transition: transform var(--animation-global), opacity var(--animation-global);
+}
+
+/* Кнопка закрытия модального окна */
+.modal-close {
+  /* Позиционирование кнопки */
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  /* Выравнивание иконки */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Размеры кнопки */
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+
+  /* Рамка кнопки */
+  background-color: var(--triary-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+
+  /* Эффект перехода */
+  transition: fill var(--animation-global);
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  fill: var(--accent-color);
+}
+
+/* Размеры иконки */
+.modal-icon {
+  min-width: 18px;
+  height: 18px;
+}
+
+/*
+  |==============================
+  | Запрет скролла при вызове модальной формы
+  |==============================
+*/
+
+.no-scroll {
+  overflow: hidden;
+}
