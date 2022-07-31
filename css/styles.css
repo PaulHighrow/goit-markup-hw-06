@@ -12,6 +12,7 @@
   --header-border: #ececec;
   --card-border: #eeeeee;
   --customer-color: #afb1b8;
+  --footer-color: rgba(255, 255, 255, 0.6);
 
   /* Переменные шрифтов */
   --main-font-family: 'Roboto', sans-serif;
@@ -51,7 +52,7 @@ svg {
   display: block;
 }
 
-/* Класс для скрытых заголовков */
+/* Класс для скрытых элементов */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -269,14 +270,16 @@ svg {
   font-size: 44px;
 }
 
-/* Кнопка-герой */
-.btn-order {
-  /* Размеры, рамка и отступы кнопки */
+/* Кнопка-герой и кнопки форм */
+.btn-order,
+.join-btn,
+.modal-btn {
+  /* Размеры, рамка и отступы */
   padding: 10px 32px;
   border-radius: 4px;
   border: none;
 
-  /* Шрифт кнопки */
+  /* Шрифт кнопок */
   font-weight: 700;
   font-size: 16px;
   line-height: 1.88;
@@ -287,13 +290,52 @@ svg {
   background-color: var(--accent-color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
-  /* Эффект перехода для кнопки */
+  /* Эффект курсора */
+  cursor: pointer;
+
+  /* Эффект перехода */
   transition: background-color var(--animation-global);
 }
 
-/* Эффекты кнопки-героя */
+/* Уточнения стилей для кнопок форм
+Перемещены сюда для соблюдения правил каскадности*/
+
+/* Кнопка формы подписки в футере */
+.join-btn {
+  /* Выравнивание элементов кнопки */
+  display: inline-flex;
+  align-items: center;
+
+  /* Зазор между элементами кнопки */
+  gap: 10px;
+
+  /* Поля кнопки */
+  padding: 10px 28px;
+
+  /* Межсимвольный интервал */
+  letter-spacing: 0.06em;
+}
+
+/* Кнопка отправки модальной формы */
+.modal-btn {
+  /* Расположение кнопки по центру формы */
+  display: block;
+  margin: 0 auto;
+
+  /* Поля кнопки */
+  padding: 10px 55px;
+
+  /* Межсимвольный интервал */
+  letter-spacing: 0.06em;
+}
+
+/* Эффекты кнопок */
 .btn-order:hover,
-.btn-order:focus {
+.join-btn:hover,
+.modal-btn:hover,
+.btn-order:focus,
+.join-btn:focus,
+.modal-btn:focus {
   background-color: var(--secondary-accent-color);
 }
 
@@ -579,7 +621,7 @@ svg {
 
 /* Стили элемента address, уникальный цвет с макета */
 .contacts-footer .link {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--footer-color);
 
   font-size: 14px;
   line-height: 1.71;
@@ -590,7 +632,7 @@ svg {
   color: var(--triary-color);
 }
 
-/* Расположение и выравнивание двух контейнеров в футере */
+/* Расположение и выравнивание контейнеров в футере */
 .footer > .container {
   display: flex;
   align-items: baseline;
@@ -599,6 +641,11 @@ svg {
 /* Отступ от контейнера контактной информации */
 .address-container {
   margin-right: 70px;
+}
+
+/* Отступ контейнера формы от других блоков футера */
+.newsletter-container {
+  margin-left: auto;
 }
 
 /* Стиль заголовка списка соцсетей в футере */
@@ -610,6 +657,64 @@ svg {
   text-transform: uppercase;
 
   color: var(--triary-color);
+}
+
+/* Форма подписки на рассылку */
+/* Удаление четырехпиксельного зазора между элементами формы подписки */
+.join-form {
+  display: flex;
+
+  /* Относительное позиционирование формы для размещения метки внутри поля */
+  position: relative;
+}
+
+/* Позиционирование метки внутри поля и эффект перехода её смещения при вводе данных */
+.join-label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: var(--footer-color);
+  transition: transform var(--animation-global), color var(--animation-global);
+}
+
+/* Стилизация поля формы подписки */
+.join-input {
+  padding: 15px 16px;
+  margin-right: 12px;
+
+  width: 358px;
+  background-color: transparent;
+
+  color: var(--footer-color);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+
+  /* Адаптивная тень для поля формы из макета */
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+
+  /* Эффект перехода цвета рамки при фокусе поля */
+  transition: border-color var(--animation-global);
+}
+
+/* Смещение и смена цвета метки при исчезновении плейсхолдера */
+.join-input:not(:placeholder-shown) + .join-label {
+  transform: translateY(-33px) scale(0.9);
+  color: var(--accent-color);
+  background-color: var(--bg-color);
+}
+
+/* Смена цвета рамки при фокусе поля */
+.join-input:focus-within {
+  border-color: var(--accent-color);
+  outline: transparent;
+}
+
+/* Размеры иконки кнопки */
+.join-icon {
+  width: 24px;
+  height: 24px;
 }
 
 /* =============== Стили контента страницы портфолио =============== */
@@ -788,7 +893,6 @@ svg {
 /* Эффект "лопнувшей формы", центрирование при закрытии модального окна */
 .backdrop.is-hidden .modal {
   transform: translate(-50%, -50%) scale(1.05);
-  opacity: 0;
 }
 
 /* Модальное окно */
@@ -798,12 +902,15 @@ svg {
   top: 50%;
   left: 50%;
 
-  /* Цен */
-  transform: translate(-50%, -50%) scale(1);
+  /* Центрирование модального окна */
+  transform: translate(-50%, -50%);
 
   /* Приблизительные размеры модального окна */
   min-width: 530px;
   min-height: 580px;
+
+  /* Поля модального окна */
+  padding: 40px;
 
   /* Оформление модального окна */
   background: var(--triary-color);
@@ -811,6 +918,7 @@ svg {
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 
+  /* Эффект появления модальной формы */
   transition: transform var(--animation-global), opacity var(--animation-global);
 }
 
@@ -836,19 +944,200 @@ svg {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 
-  /* Эффект перехода */
+  /* Эффект перехода цвета иконки */
   transition: fill var(--animation-global);
 }
 
+/* Класс для отключенной кнопки */
+.btn:disabled {
+  background-color: lightgray;
+  color: #2a2a2a;
+}
+
+/* Размер иконки кнопки закрытия модальной формы */
+.modal-close-icon {
+  min-width: 18px;
+  height: 18px;
+}
+
+/* Эффекты при ховере и фокусе на кнопку */
 .modal-close:hover,
 .modal-close:focus {
   fill: var(--accent-color);
 }
 
-/* Размеры иконки */
-.modal-icon {
-  min-width: 18px;
+/* Заголовок модального окна */
+.modal-form-title {
+  /* Блочная модель для вертикальной геометрии и правильного расположения */
+  display: block;
+  margin-bottom: 12px;
+
+  font-size: 20px;
+
+  text-align: center;
+
+  color: var(--secondary-color);
+}
+
+/* Отступ группы элементов формы от чекбокса */
+.modal-form-group {
+  margin-bottom: 20px;
+}
+
+/* Относительное позиционирование меток полей формы */
+.modal-form-label {
+  position: relative;
+  display: block;
+
+  /* Запрет выделения метки при клике на неё */
+  user-select: none;
+}
+
+/* Отступы от меток полей формы */
+.modal-form-label:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+/* Стилизация текста меток полей формы */
+.modal-form-label-text {
+  /* Вертикальный отступ от текста меток */
+  display: block;
+  margin-bottom: 4px;
+
+  font-size: 12px;
+  line-height: calc(14 / 12);
+  letter-spacing: 0.01em;
+
+  color: #757575;
+}
+
+/* Стили полей модальной формы */
+.modal-form-input,
+.modal-form-textarea {
+  display: block;
+  width: 100%;
+
+  /* Скрытие выделения поля при выборе */
+  outline: transparent;
+
+  /* Изменение рамки поля формы */
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+
+  padding: 11px 10px 11px 42px;
+
+  font-size: 14px;
+  line-height: calc(16 / 14);
+
+  color: var(--secondary-color);
+}
+
+/* Размер и позиционирование иконок элементов модальной формы */
+.modal-form-icon {
+  width: 18px;
   height: 18px;
+
+  position: absolute;
+  bottom: 11px;
+  left: 12px;
+
+  /* Эффект перехода цвета иконки */
+  transition: fill var(--animation-global);
+}
+
+/* Изменение цвета рамки при фокусе поля формы */
+.modal-form-input:focus-within,
+.modal-form-textarea:focus-within {
+  border-color: var(--accent-color);
+
+  /* Эффект перехода цвета рамки */
+  transition: border-color var(--animation-global);
+}
+
+/* Изменение цвета иконок модального окна при фокусе поля формы */
+.modal-form-input:focus-within + .modal-form-icon {
+  fill: var(--accent-color);
+}
+
+/* Поля и размеры поля комментария */
+.modal-form-textarea {
+  padding: 12px 16px;
+
+  height: 120px;
+
+  /* Запрет изменения размера поля комментария */
+  resize: none;
+}
+
+/* Стилизация чекбокса */
+.modal-form-agreement {
+  /* Выравнивание и центрирование элементов чексбокса */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  /* Отступ чекбокса от кнопки отправки формы */
+  margin-bottom: 30px;
+
+  /* Стиль текста чекбокса */
+  font-size: 14px;
+  line-height: 1.71;
+
+  /* Запрет выделения метки при клике на неё */
+  user-select: none;
+
+  /* Изменение курсора при наведении на элементы метки чекбокса */
+  cursor: pointer;
+}
+
+.modal-form-checkbox {
+  /* Свойство для скрытия оригинального чекбокса */
+  appearance: none;
+}
+
+/* Размер иконки чекбокса */
+.modal-checkbox-icon {
+  width: 16px;
+  height: 15px;
+}
+
+/* Скрытая иконка отмеченного чекбокса */
+.modal-checkbox-icon-check {
+  opacity: 0;
+}
+
+/* Отключение непрозрачности иконки неотмеченного чекбокса при переключении */
+.modal-form-checkbox:checked + .modal-checkbox-icon .modal-checkbox-icon-uncheck {
+  opacity: 0;
+}
+
+/* Включение непрозрачности иконки отмеченного чекбокса при переключении */
+.modal-form-checkbox:checked + .modal-checkbox-icon .modal-checkbox-icon-check {
+  opacity: 1;
+}
+
+/* Эффект перехода иконок при переключении чекбокса */
+.modal-checkbox-icon-check,
+.modal-checkbox-icon-uncheck {
+  transition: opacity var(--animation-global);
+}
+
+/* Цвет и подчеркивание ссылки модального окна */
+.modal-form-agreement-link {
+  color: var(--accent-color);
+
+  /* Смещение подчеркивания для большего сходства с макетом */
+  text-underline-offset: 1px;
+
+  /* Эффект перехода */
+  transition: color var(--animation-global);
+}
+
+/* Смена цвета ссылки модального окна при ховере и фокусе */
+.modal-form-agreement-link:hover,
+.modal-form-agreement-link:focus {
+  color: var(--secondary-accent-color);
 }
 
 /*
@@ -858,5 +1147,9 @@ svg {
 */
 
 .no-scroll {
-  overflow: hidden;
+  /* Отключение скроллбара */
+  overflow-y: hidden;
+
+  /* Зарезервированное место под скроллбар, предотвращающее смещение элементов страницы */
+  padding-right: 16px;
 }

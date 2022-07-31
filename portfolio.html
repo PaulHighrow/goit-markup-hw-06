@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Homework 5" />
+    <meta name="description" content="Homework 6" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +26,7 @@
     <!-- Шапка -->
     <header class="header border">
       <div class="header container">
-        <a class="header logo link" href="https://paulhighrow.github.io/goit-markup-hw-05/"
+        <a class="header logo link" href="https://paulhighrow.github.io/goit-markup-hw-06/"
           ><span class="logo-web">Web</span>Studio</a
         >
         <nav>
@@ -259,8 +259,9 @@
     <!-- Футер -->
     <footer class="footer">
       <div class="container">
+        <!-- Адрес -->
         <div class="address-container">
-          <a class="footer logo link" href="https://paulhighrow.github.io/goit-markup-hw-05/"
+          <a class="footer logo link" href="https://paulhighrow.github.io/goit-markup-hw-06/"
             ><span class="logo-web">Web</span>Studio</a
           >
           <address class="contacts-footer">
@@ -286,6 +287,7 @@
             </ul>
           </address>
         </div>
+        <!-- Социальные сети -->
         <div class="social-network-container">
           <h3 class="footer-title">присоединяйтесь</h3>
           <ul class="social-network list">
@@ -342,6 +344,27 @@
               </a>
             </li>
           </ul>
+        </div>
+        <!-- Форма подписки на рассылку -->
+        <div class="newsletter-container">
+          <h3 class="footer-title">Подпишитесь на рассылку</h3>
+          <form class="join-form" name="join-form" autocomplete="on">
+            <input
+              class="join-input"
+              id="join-email"
+              name="join-email"
+              type="email"
+              placeholder=" "
+              required
+            />
+            <label class="join-label" for="join-email">Email</label>
+            <button class="join-btn" type="submit">
+              <span>Подписаться</span>
+              <svg class="join-icon">
+                <use href="./images/icons.svg#join"></use>
+              </svg>
+            </button>
+          </form>
         </div>
       </div>
     </footer>
