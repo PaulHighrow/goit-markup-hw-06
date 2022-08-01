@@ -1096,10 +1096,19 @@ svg {
   appearance: none;
 }
 
-/* Размер иконки чекбокса */
+/* Кастомный чекбокс */
 .modal-checkbox-icon {
+  /* Размеры иконки */
   width: 16px;
   height: 15px;
+
+  /* Эффект перехода цвета иконки кастомного чекбокса при фокусе */
+  transition: fill var(--animation-global);
+}
+
+/* Имитация состояния фокуса для кастомного чекбокса */
+.modal-form-agreement:focus-within > .modal-checkbox-icon {
+  fill: var(--accent-color);
 }
 
 /* Скрытая иконка отмеченного чекбокса */
